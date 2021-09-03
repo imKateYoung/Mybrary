@@ -20,9 +20,7 @@ router.get('/', async (req, res) => {
     catch{
         res.redirect('/')
     }
-    
 })
-
 
 //new author router
 router.get('/new',(req,res) =>{
@@ -47,18 +45,7 @@ router.post('/', express.urlencoded({ limit: '10mb', extended: false }), async (
             errorMessage: 'Error creating Author'
         })
     }
-    // author.save((err,newAuthor) =>{
-    //     if(err){
-    //         res.render('authors/new',{
-    //             author: author,
-    //             errorMessage: 'Error creating Author'
-    //         })
-    //     }
-    //     else{
-    //         res.redirect(`authors`)
-    //     }
-    // })
-    //res.send(req.body.name)
+
 })
 
 module.exports = router;

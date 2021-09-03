@@ -11,6 +11,8 @@ const expressLayouts = require('express-ejs-layouts')
 
 const indexRouter = require('./routes/index')
 const authoRouter = require('./routes/authors')
+const bookRouter = require('./routes/books')
+
 
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views')
@@ -18,7 +20,6 @@ app.set('layout','layouts/layout')
 
 app.use(expressLayouts)
 app.use(express.static('public'))
-
 
 
 //set up db connection 
@@ -35,9 +36,9 @@ db.once('error',error => console.log(error))
 
 
 app.use('/',indexRouter)
-
 app.use('/',indexRouter)
 app.use('/authors',authoRouter)
+app.use('/books', bookRouter)
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
