@@ -4,17 +4,7 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book') //handling data
 const Author = require('../models/author')  //pass it down to view
-const path = require('path')
-const uploadPath = path.join('public',Book.coverImageBasePath)
-const fs = require('fs')
-const multer = require('multer')
-const imageMimeTypes = ['image/jpeg','image/png','image/gif']
-const upload = multer({
-    dest: uploadPath,
-    fileFilter:(req,file,callback) =>{
-        callback(null,imageMimeTypes.includes(file.mimetype))
-    }
-})
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif']
 
 //get all book route
 router.get('/', async (req, res) => {
@@ -49,16 +39,17 @@ router.get('/new', async (req,res) =>{
 
 
 //create new book
-router.post('/', express.urlencoded({ limit: '10mb', extended: false }), upload.single('cover'), async (req, res) => {
-    const fileName = req.file != null ? req.file.filename : null
+router.post('/', express.urlencoded({ limit: '10mb', extended: false }),  async (req, res) => {
+   
    const book = new Book({
        title: req.body.title,
        author: req.body.author,
        publishDate: new Date(req.body.publishDate),
        pageCount: parseInt(req.body.pageCount),
-       coverImageName : fileName,
        desc: req.body.desc
    })
+   saveCover(book,req.body.cover)
+
    try{
     const newBook = await book.save()
     res.redirect('books')
@@ -87,5 +78,15 @@ async function renderNewPage(res,book,hasError = false){
     }
     //res.render('books/new')
 }
+
+function saveCover(book,coverEncoded){
+    if(coverEncoded == null) return
+    const cover = JSON.parse(coverEncoded)
+    if(cover != null && imageMimeTypes.includes(cover.type) ){
+        book.coverImage = new Buffer.from(cover.data,"base64")
+        book.coverImageType = cover.type
+    }
+}
+
 
 module.exports = router;
