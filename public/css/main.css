@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import 'shared/header.css';
+@import 'shared/button.css';
+
+:root{
+    --color-text-light: hsl(200,100%,87%);
+    --color-base-hue: 200;
+    --color-danger-hue-offset: 180;
+    --color-danger-hue: calc(var(var(--color-base-hue) - var(var(--color-danger-hue-offset))))
+}
+
+*, *::before, *, *::after{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'MedievalSharp', cursive;
+    font-size: 20px;
+    color: var(--color-text-light);
+	background-color: silver;
+	animation:changecolor 25s infinite;
+}
+@-webkit-keyframes changecolor{
+	0%{background-image: linear-gradient(40deg ,  	#FF4500 , 	#FFA500);}
+	20%{background-image: linear-gradient(80deg ,#BA55D3 ,#9370DB );}
+	40%{background-image: linear-gradient(120deg , 	#FF69B4 ,#FF1493 );}
+	60%{background-image: linear-gradient(160deg ,#8B008B ,#BDB76B );}
+	80%{background-image: linear-gradient(200deg  ,#20B2AA  ,#87CEFA );}
+	100%{background-image: linear-gradient(240deg  , #ADFF2F , #008000);}
+}
+
+
+.container{
+    max-width: 1200px;
+    margin-right: auto;
+    margin-bottom: 3rem;
+}
+
+.inner-container {
+    margin: 0 2rem;
+}
+
+.page-header {
+    font-size: 2rem;
+    font-weight: 500;
+}
