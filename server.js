@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
-
+const methodoverride = require('method-override')
 
 const indexRouter = require('./routes/index')
 const authoRouter = require('./routes/authors')
@@ -20,7 +20,7 @@ app.set('layout','layouts/layout')
 
 app.use(expressLayouts)
 app.use(express.static('public'))
-
+app.use(methodoverride('_method'))
 
 //set up db connection 
 const  mongoose = require('mongoose');
