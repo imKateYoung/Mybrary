@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 @import 'shared/header.css';
 @import 'shared/button.css';
 @import 'shared/form.css';
@@ -17,7 +18,7 @@
 }
 
 body{
-    font-family: 'MedievalSharp', cursive;
+    font-family: 'Oswald', sans-serif;
     font-size: 20px;
     color: var(--color-text-light);
 	background-color: silver;
