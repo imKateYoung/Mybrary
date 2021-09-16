@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 @import 'shared/header.css';
 @import 'shared/button.css';
+@import 'shared/form.css';
 
 :root{
     --color-text-light: hsl(200,100%,87%);
