@@ -21,8 +21,8 @@ body{
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
     color: var(--color-text-light);
-	background-color: silver;
-	animation:changecolor 25s infinite;
+	background-color: black;
+	/* animation:changecolor 25s infinite;
 }
 @-webkit-keyframes changecolor{
 	0%{background-image: linear-gradient(40deg ,  	#FF4500 , 	#FFA500);}
@@ -31,7 +31,7 @@ body{
 	60%{background-image: linear-gradient(160deg ,#8B008B ,#BDB76B );}
 	80%{background-image: linear-gradient(200deg  ,#20B2AA  ,#87CEFA );}
 	100%{background-image: linear-gradient(240deg  , #ADFF2F , #008000);}
-}
+} */
 
 
 .container{
