@@ -12,7 +12,7 @@ const methodoverride = require('method-override')
 const indexRouter = require('./routes/index')
 const authoRouter = require('./routes/authors')
 const bookRouter = require('./routes/books')
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/users')
 
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views')
@@ -39,7 +39,7 @@ app.use('/',indexRouter)
 app.use('/',indexRouter)
 app.use('/authors',authoRouter)
 app.use('/books', bookRouter)
-app.use('/user',userRouter)
+app.use('/users', userRouter)
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) // To parse the incoming requests with JSON payloads

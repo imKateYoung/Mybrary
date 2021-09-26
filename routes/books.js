@@ -38,7 +38,6 @@ router.get('/new', async (req,res) =>{
     renderNewPage(res,new Book())
 })
 
-
 //create new book
 router.post('/', express.urlencoded({ limit: '10mb', extended: false }),  async (req, res) => {
    
