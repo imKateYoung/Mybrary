@@ -21,7 +21,7 @@ body{
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
     color: var(--color-text-light);
-	background-color: black;
+	background-color:black;
 	/* animation:changecolor 25s infinite;
 }
 @-webkit-keyframes changecolor{

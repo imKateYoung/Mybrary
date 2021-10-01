@@ -1,18 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/user')
+const User = require('../models/user') //for db
 const bcrypt = require('bcrypt')
-const localUsers = []
 
-
-//users page localhost:3000/users/
-router.get('/', (req,res) => {
-    res.render('users/index', { username:"Kate" })
+const initializePassport = require('../passport-config')
+const passport = require('passport')
+initializePassport(passport, email =>{
+    return user.find(user => user.email === email)
 })
 
-//get signup form
-router.get('/signup', (req, res) => {
-    res.render('users/signup')
+//users page localhost/users/
+router.get('/', (req,res) => {
+    res.render('users/index', { username:"Jane" })
 })
 
 //login route
@@ -20,34 +19,41 @@ router.get('/login', (req, res) => {
     res.render('users/login')
 })
 
-//sign up form submit
-router.post('/', express.urlencoded({ limit: '10mb', extended: false }) ,async (req,res) =>{
-    console.log('first try')
-    try{
-        const hasedPassword = await bcrypt.hash(req.body.password, 10)
-        console.log(hasedPassword)
-        localUsers.push({
-            id: Date.now().toString(),
-            username: req.body.username,
-            email: req.body.email,
-            password: hasedPassword
-        })
-        console.log(localUsers)
-        res.redirect('users/login')
+//get signup form
+router.get('/signup', function(req, res) {
+    res.render('users/signup')
+   //console.log(res)
+   console.log(req.body)
+})
 
-    }
-    catch{
-        res.redirect('/users/signup')
-        console.log('this is a catch block, meaning it failed to submit')
-    }    
-    console.log(users)
+
+//sign up form submit
+router.post('/', express.urlencoded({ extended: false }), async(req,res)=>{
+    const hashedPassword = await bcrypt.hash(req.body.userpassword,10)
+     const user = new User({
+         username: req.body.username,
+         email: req.body.email,
+         userpassword: hashedPassword
+     })
+     
+     try{
+         const newUser = await user.save()
+         console.log('succesfully created new user!')
+         console.log(newUser)
+         return res.redirect(307,"/login")
+     }
+     catch(err){
+         console.log(err)
+         return res.redirect('/signup')
+     }
 })
 
 
 
 
 
-//signup route
+
+
 
 //logout
 

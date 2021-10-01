@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
 //new author router
 router.get('/new', (req, res) => {
     res.render('authors/new', { author: new Author() })
+    //console.log(req.body)
 })
 
 
@@ -34,12 +35,14 @@ router.post('/', express.urlencoded({ limit: '10mb', extended: false }), async (
     const author = new Author({
         name: req.body.name
     })
+
     try{
         const newAuthor = await author.save()
         res.redirect(`authors/${newAuthor.id}`)
-        res.redirect(`authors`)
+       
     }
-    catch{
+    catch(err){
+        console.log(err)
         res.render('authors/new', 
         {
             author: author,
@@ -54,16 +57,16 @@ router.get('/:id', async (req, res) => {
     try {
         const author = await Author.findById(req.params.id)
         const books = await Book.find({ author: author.id }).limit(5).exec()
-        res.render('authors/show', {
+        return res.render('authors/show', {
             author: author,
             booksByAuthor: books
         })
     }
     catch (err) {
         console.log(err)
-        res.redirect('/')
+        return res.redirect('/')
     }
-    res.send('Show Author' + req.params.id)
+     res.send('Show Author' + req.params.id)
 })
 
 
